@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed664f54-4c31-47ce-bff0-e99ca5dbec9a" name="Changes" comment="">
+    <list default="true" id="ed664f54-4c31-47ce-bff0-e99ca5dbec9a" name="Changes" comment="sa">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/telegram/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/telegram/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/telegram/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/telegram/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/telegram/entity/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/telegram/entity/enums/Role.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,5 +72,9 @@
       <updated>1741840652684</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sa" />
+    <option name="LAST_COMMIT_MESSAGE" value="sa" />
   </component>
 </project>

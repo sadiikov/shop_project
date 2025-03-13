@@ -1,0 +1,22 @@
+Index: src/main/java/org/telegram/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Hello world!\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/Main.java b/src/main/java/org/telegram/Main.java
+--- a/src/main/java/org/telegram/Main.java	(revision c36b463a4d03914d7818f832c2994dac3230abf7)
++++ b/src/main/java/org/telegram/Main.java	(date 1741883800247)
+@@ -1,7 +1,9 @@
+ package org.telegram;
+ 
++import org.telegram.service.AuthService;
++
+ public class Main {
+     public static void main(String[] args) {
+-        System.out.println("Hello world!");
++        AuthService.service();
+     }
+ }
+\ No newline at end of file

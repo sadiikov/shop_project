@@ -1,0 +1,43 @@
+Index: src/main/java/org/telegram/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\nimport org.telegram.entity.enums.Role;\r\nimport org.telegram.entity.enums.Status;\r\n\r\n@Data\r\n@AllArgsConstructor\r\n@NoArgsConstructor\r\npublic class User {\r\n    private String id;\r\n    private String name;\r\n    private String password;\r\n    private Role role;\r\n    private Status status;\r\n    private Double balance;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/User.java b/src/main/java/org/telegram/entity/User.java
+--- a/src/main/java/org/telegram/entity/User.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/User.java	(date 1741883757276)
+@@ -13,7 +13,10 @@
+     private String id;
+     private String name;
+     private String password;
++    private String login;
+     private Role role;
+     private Status status;
+     private Double balance;
++    private Status userStatus;
++    private Role userRole;
+ }
+Index: src/main/java/org/telegram/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Hello world!\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/Main.java b/src/main/java/org/telegram/Main.java
+--- a/src/main/java/org/telegram/Main.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/Main.java	(date 1741883121811)
+@@ -1,7 +1,9 @@
+ package org.telegram;
+ 
++import org.telegram.service.AuthService;
++
+ public class Main {
+     public static void main(String[] args) {
+-        System.out.println("Hello world!");
++        AuthService.service();
+     }
+ }
+\ No newline at end of file

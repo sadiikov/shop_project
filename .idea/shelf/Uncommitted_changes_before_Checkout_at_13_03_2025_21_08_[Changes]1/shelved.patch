@@ -1,0 +1,719 @@
+Index: src/main/java/org/telegram/entity/History.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\n\r\nimport java.util.List;\r\n\r\n@AllArgsConstructor\r\n@Data\r\n@NoArgsConstructor\r\npublic class History {\r\n    private String id;\r\n    private List<Product> products;\r\n    private Double overallPrice;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/History.java b/src/main/java/org/telegram/entity/History.java
+--- a/src/main/java/org/telegram/entity/History.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/History.java	(date 1741845842307)
+@@ -6,9 +6,11 @@
+ 
+ import java.util.List;
+ 
+-@AllArgsConstructor
++
+ @Data
++@AllArgsConstructor
+ @NoArgsConstructor
++
+ public class History {
+     private String id;
+     private List<Product> products;
+Index: src/main/java/org/telegram/entity/Shop.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity;\r\n\r\npublic class Shop {\r\n    private String id;\r\n    private String sellerId;\r\n    private String name;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/Shop.java b/src/main/java/org/telegram/entity/Shop.java
+--- a/src/main/java/org/telegram/entity/Shop.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/Shop.java	(date 1741882015861)
+@@ -1,7 +1,34 @@
+ package org.telegram.entity;
+ 
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++
++import java.util.ArrayList;
++import java.util.List;
++
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
+ public class Shop {
+     private String id;
+     private String sellerId;
+     private String name;
++    private List<Product> products;
++
++    public Shop(String name) {
++        this.name = name;
++        this.products = new ArrayList<>();
++    }
++
++    public List<Product> getProducts() {
++        if (products == null) {
++            products = new ArrayList<>();
++        }
++        return products;
++    }
++
++    public void addProduct(Product product) {
++        this.getProducts().add(product);
++    }
+ }
+Index: src/main/java/org/telegram/entity/Basket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity;\r\n\r\nimport java.util.List;\r\n\r\npublic class Basket {\r\n    private String id;\r\n    private List<Product> products;\r\n    private Double overallPrice;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/Basket.java b/src/main/java/org/telegram/entity/Basket.java
+--- a/src/main/java/org/telegram/entity/Basket.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/Basket.java	(date 1741876087443)
+@@ -1,9 +1,16 @@
+ package org.telegram.entity;
+ 
++import lombok.AllArgsConstructor;
++import lombok.Data;
++import lombok.NoArgsConstructor;
++
+ import java.util.List;
+-
++@Data
++@AllArgsConstructor
++@NoArgsConstructor
+ public class Basket {
+     private String id;
+     private List<Product> products;
+     private Double overallPrice;
++
+ }
+Index: src/main/java/org/telegram/db/DataBase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.db;\r\n\r\nimport lombok.Getter;\r\nimport lombok.Setter;\r\nimport org.telegram.entity.*;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Scanner;\r\n\r\npublic class DataBase {\r\n    public static Scanner intscan = new Scanner(System.in);\r\n    public static Scanner strscan = new Scanner(System.in);\r\n\r\n    @Getter\r\n    @Setter\r\n    private static User currentUser;\r\n\r\n    public static List<User> users = new ArrayList<>();\r\n    public static List<Shop> shops = new ArrayList<>();\r\n    public static List<Product> products = new ArrayList<>();\r\n    public static List<History> histories = new ArrayList<>();\r\n    public static List<Basket> baskets = new ArrayList<>();\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/db/DataBase.java b/src/main/java/org/telegram/db/DataBase.java
+--- a/src/main/java/org/telegram/db/DataBase.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/db/DataBase.java	(date 1741876213648)
+@@ -14,7 +14,8 @@
+ 
+     @Getter
+     @Setter
+-    private static User currentUser;
++
++    public static User currentUser;
+ 
+     public static List<User> users = new ArrayList<>();
+     public static List<Shop> shops = new ArrayList<>();
+Index: src/main/java/org/telegram/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\nimport org.telegram.entity.enums.Role;\r\nimport org.telegram.entity.enums.Status;\r\n\r\n@Data\r\n@AllArgsConstructor\r\n@NoArgsConstructor\r\npublic class User {\r\n    private String id;\r\n    private String name;\r\n    private String password;\r\n    private Role role;\r\n    private Status status;\r\n    private Double balance;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/User.java b/src/main/java/org/telegram/entity/User.java
+--- a/src/main/java/org/telegram/entity/User.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/User.java	(date 1741847613617)
+@@ -10,10 +10,13 @@
+ @AllArgsConstructor
+ @NoArgsConstructor
+ public class User {
++    private String login;
+     private String id;
+     private String name;
+     private String password;
+     private Role role;
+     private Status status;
+     private Double balance;
++    private Status userStatus;
++    private Role userRole;
+ }
+Index: src/main/java/org/telegram/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Hello world!\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/Main.java b/src/main/java/org/telegram/Main.java
+--- a/src/main/java/org/telegram/Main.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/Main.java	(date 1741848162865)
+@@ -1,7 +1,10 @@
+ package org.telegram;
+ 
++import lombok.SneakyThrows;
++import org.telegram.service.AuthService;
++
+ public class Main {
+     public static void main(String[] args) {
+-        System.out.println("Hello world!");
++        AuthService.service();
+     }
+ }
+\ No newline at end of file
+Index: src/main/java/org/telegram/service/AuthService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.service;\r\n\r\nimport org.telegram.entity.User;\r\n\r\nimport static org.telegram.db.DataBase.*;\r\n\r\npublic class AuthService {\r\n    public void service(){\r\n        while (true){\r\n            System.out.println(\"\"\"\r\n                    0 exit\r\n                    1 sign up\r\n                    2 sign in\r\n                    \"\"\");\r\n            switch (intscan.nextInt()){\r\n                case 0 -> {return;}\r\n                case 1 -> {\r\n                    User user = new User();\r\n\r\n                    signUp(user);\r\n                }\r\n                case 2 -> signIn();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void signUp(User user) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/service/AuthService.java b/src/main/java/org/telegram/service/AuthService.java
+--- a/src/main/java/org/telegram/service/AuthService.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/service/AuthService.java	(date 1741877808475)
+@@ -1,30 +1,119 @@
+ package org.telegram.service;
+ 
++import org.telegram.db.DataBase;
+ import org.telegram.entity.User;
++import org.telegram.entity.enums.Role;
++import org.telegram.entity.enums.Status;
++
++import java.util.Objects;
++import java.util.Optional;
++import java.util.Scanner;
++import java.util.UUID;
++import java.util.List;
+ 
+ import static org.telegram.db.DataBase.*;
+ 
+ public class AuthService {
+-    public void service(){
+-        while (true){
++    private final Scanner scanner = new Scanner(System.in);
++
++    public static void service() {
++        while (true) {
+             System.out.println("""
+-                    0 exit
+-                    1 sign up
+-                    2 sign in
++                    0 - Exit
++                    1 - Sign Up
++                    2 - Sign In
+                     """);
+-            switch (intscan.nextInt()){
+-                case 0 -> {return;}
+-                case 1 -> {
+-                    User user = new User();
++            int choice = intscan.nextInt();
++            switch (choice) {
++                case 0 -> {
++                    return;
++                }
++                case 1 -> signUp();
++                case 2 -> signIn();
++                default -> System.out.println("Invalid choice. Please try again.");
++            }
++        }
++    }
++
++    public static void signUp() {
++        User user = new User();
++        user.setId(UUID.randomUUID().toString());
++
++        System.out.println("Enter login: ");
++        String login = strscan.nextLine().trim();
+ 
+-                    signUp(user);
+-                }
+-                case 2 -> signIn();
+-            }
+-        }
+-    }
++        if (users.stream().anyMatch(u -> u.getLogin().equals(login))) {
++            System.out.println("Such a user exists on the network 😔...");
++            return;
++        }
++
++        user.setLogin(login);
++
++        System.out.println("Enter name: ");
++        user.setName(strscan.nextLine().trim());
++
++        System.out.println("Enter password: ");
++        user.setPassword(strscan.nextLine().trim());
++
++        /*System.out.println("Enter balance: ");
++        while (!intscan.hasNextDouble()) {
++            System.out.println("Invalid input. Please enter a valid number:");
++            intscan.next();
++        }
++        user.setBalance(intscan.nextDouble());
++        strscan.nextLine();
++*/
++        user.setUserStatus(Status.ACTIVE);
++        chooseRole(user);
++        users.add(user);
++        System.out.println("User successfully registered!");
++    }
++
++    public static void signIn() {
++        System.out.println("Enter login: ");
++        String login = strscan.nextLine().trim();
++
++        System.out.println("Enter password: ");
++        String password = strscan.nextLine().trim();
++
++        Optional<User> userOptional = users.stream()
++                .filter(u -> Objects.equals(u.getLogin(), login) && Objects.equals(u.getPassword(), password))
++                .findFirst();
++
++        if (userOptional.isEmpty()) {
++            System.out.println("This user does not exist on the network. 😔...");
++            return;
++        }
+ 
+-    private void signUp(User user) {
++        User currentUser = userOptional.get();
++        if (currentUser.getUserRole() == Role.USER) {
++            UserService.service();
++        } else if (currentUser.getUserRole() == Role.SELLER) {
++            SellerService.sellerService();
++        }
++    }
+ 
++    private static void chooseRole(User user) {
++        System.out.println("""
++                Choose Role: 
++                1. User
++                2. Seller
++                """);
++        int choice;
++        while (true) {
++            if (intscan.hasNextInt()) {
++                choice = intscan.nextInt();
++                strscan.nextLine();
++                if (choice == 1) {
++                    user.setUserRole(Role.USER);
++                    break;
++                } else if (choice == 2) {
++                    user.setUserRole(Role.SELLER);
++                    break;
++                }
++            }
++            System.out.println("Error entering information, please try again. 😊");
++            strscan.nextLine();
++        }
+     }
+ }
+Index: src/main/java/org/telegram/service/UserService.java
+===================================================================
+diff --git a/src/main/java/org/telegram/service/UserService.java b/src/main/java/org/telegram/service/UserService.java
+new file mode 100644
+--- /dev/null	(date 1741880881151)
++++ b/src/main/java/org/telegram/service/UserService.java	(date 1741880881151)
+@@ -0,0 +1,208 @@
++
++package org.telegram.service;
++import lombok.Data;
++import org.telegram.db.DataBase;
++import org.telegram.entity.*;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Optional;
++
++import static org.telegram.db.DataBase.intscan;
++
++
++public class UserService {
++    public static void service (){
++        String menu = """
++                       User Menu: 
++                   0.Exit
++                   1.Show shops
++                   2.Search product
++                   3.Add to basket
++                   4.Buy
++                   5.Show history 
++                   6.Show balance 
++                   """;
++
++        while (true) {
++            System.out.println(menu);
++            int choice = intscan.nextInt();
++            switch (choice) {
++                case 0 -> {return;}
++                case 1 -> showShops();
++                case 2 -> searchProduct();
++                case 3 -> addToBasket();
++                case 4 -> buyProduct();
++                case 5 -> showHistory();
++                case 6 -> showBalance();
++                default -> System.out.println("error");
++            }
++        }
++    }
++
++    /// METODLARR
++
++    private static void showShops() {
++        System.out.println("LIST OF SHOPS: ");
++        List<Shop> shops = DataBase.shops;
++        if (shops.isEmpty()) {
++            System.out.println("No shops");
++            return;
++        }
++        System.out.println("SHOPS:");
++        shops.forEach(shop -> System.out.println(" - " + shop.getName()));
++    }
++
++
++    private static void searchProduct() {
++        System.out.println("Enter product name: ");
++        String productName = DataBase.strscan.nextLine().toLowerCase();
++
++        List<Product> products = DataBase.products.stream()
++                .filter(p -> p.getName().toLowerCase().contains(productName))
++                .toList();
++
++        if (products.isEmpty()) {
++            System.out.println("No products found.");
++            return;
++        }
++
++        System.out.println("Found products:");
++        products.forEach(product ->
++                System.out.println(" - " + product.getName() + " | Price: " + product.getPrice())
++        );
++    }
++
++    private static void addToBasket() {
++        System.out.println("Select a shop:");
++        List<Shop> shops = DataBase.shops;
++        for (int i = 0; i < shops.size(); i++) {
++            System.out.println((i + 1) + ". " + shops.get(i).getName());
++        }
++        int shopChoice = intscan.nextInt() - 1;
++        if (shopChoice < 0 || shopChoice >= shops.size()) {
++            System.out.println("Invalid shop selection!");
++            return;
++        }
++        Shop selectedShop = shops.get(shopChoice);
++
++        if (selectedShop.getProducts().isEmpty()) {
++            System.out.println("No products available in this shop.");
++            return;
++        }
++
++        System.out.println("Available products:");
++        selectedShop.getProducts().forEach(product ->
++                System.out.println(" - " + product.getName() + " | Price: " + product.getPrice())
++        );
++
++        System.out.println("Enter product name to add to basket: ");
++        DataBase.strscan.nextLine(); // Consume newline
++        String productName = DataBase.strscan.nextLine().toLowerCase();
++
++        Optional<Product> productOpt = selectedShop.getProducts().stream()
++                .filter(p -> p.getName().equalsIgnoreCase(productName))
++                .findFirst();
++
++        if (productOpt.isEmpty()) {
++            System.out.println("Product not found in this shop!");
++            return;
++        }
++
++        Product product = productOpt.get();
++        User currentUser = DataBase.getCurrentUser();
++        Basket basket = DataBase.baskets.stream()
++                .filter(b -> b.getId().equals(currentUser.getId()))
++                .findFirst()
++                .orElseGet(() -> {
++                    Basket newBasket = new Basket(currentUser.getId(), new ArrayList<>(), 0.0);
++                    DataBase.baskets.add(newBasket);
++                    return newBasket;
++                });
++
++        basket.getProducts().add(product);
++        basket.setOverallPrice(basket.getOverallPrice() + product.getPrice());
++        System.out.println("Product added to basket.");
++    }
++
++
++    private static void buyProduct() {
++        User currentUser = DataBase.getCurrentUser();
++        Basket basket = DataBase.baskets.stream()
++                .filter(b -> b.getId().equals(currentUser.getId()))
++                .findFirst()
++                .orElse(null);
++
++        if (basket == null || basket.getProducts().isEmpty()) {
++            System.out.println("Your basket is empty.");
++            return;
++        }
++
++        double totalPrice = basket.getOverallPrice();
++        if (currentUser.getBalance() < totalPrice) {
++            System.out.println("Insufficient balance!");
++            return;
++        }
++
++
++        currentUser.setBalance(currentUser.getBalance() - totalPrice);
++        History history = new History();
++        history.setProducts(basket.getProducts());
++        history.setOverallPrice(totalPrice);
++        DataBase.histories.add(history);
++
++        basket.getProducts().clear();
++        basket.setOverallPrice(0.0);
++
++        System.out.println("Purchase successful! Total cost: " + totalPrice);
++    }
++
++    private static void showHistory() {
++        List<History> histories = DataBase.histories;
++        if (histories.isEmpty()) {
++            System.out.println("No purchase history.");
++            return;
++        }
++
++        System.out.println("Purchase history:");
++        histories.forEach(history ->
++                System.out.println(" - Spent: " + history.getOverallPrice() + " | Products: " + history.getProducts().size())
++        );
++    }
++
++    private static void showBalance() {
++        String menu = """
++                 Balance Menu:
++             0.Exit
++             1.Show Balance
++             2.Add  Balance
++             """;
++        System.out.println(menu);
++        int choice = intscan.nextInt();
++        switch (choice){
++            case 0->{
++                return;
++            }
++            case 1->{
++                System.out.println("Your balance: " + DataBase.getCurrentUser().getBalance());
++            }
++            case 2 -> {
++                System.out.print("Enter amount: ");
++                double summ = DataBase.intscan.nextDouble();
++                if (summ <= 0) {
++                    System.out.println("Invalid amount. Please enter a positive value.");
++                    return;
++                }
++                User currentUser = DataBase.getCurrentUser();
++                currentUser.setBalance(currentUser.getBalance() + summ);
++                System.out.println("successfull: " + currentUser.getBalance());
++            }
++
++            default -> {
++                System.out.println("error");
++            }
++
++        }
++    }
++
++}
+\ No newline at end of file
+Index: src/main/java/org/telegram/service/SellerService.java
+===================================================================
+diff --git a/src/main/java/org/telegram/service/SellerService.java b/src/main/java/org/telegram/service/SellerService.java
+new file mode 100644
+--- /dev/null	(date 1741881831713)
++++ b/src/main/java/org/telegram/service/SellerService.java	(date 1741881831713)
+@@ -0,0 +1,129 @@
++package org.telegram.service;
++
++import org.telegram.db.DataBase;
++import org.telegram.entity.Product;
++import org.telegram.entity.Shop;
++
++import java.util.Optional;
++import java.util.UUID;
++
++import static org.telegram.db.DataBase.intscan;
++
++public class SellerService {
++    public static void sellerService (){
++        String menu = """
++                       Saleer Menu: 
++                   0.Exit
++                   1.add product 
++                   2.edit product
++                   3.create shop
++                   4.show shops
++                   5.Show history 
++                   6.delete profile
++                   """;
++
++        while (true) {
++            System.out.println(menu);
++            int choice = intscan.nextInt();
++            switch (choice) {
++                case 0 -> {
++                    System.out.println("Returning to previous menu...");
++                    return;
++                }
++                case 1 -> addProduct();
++                case 2 -> editProduct();
++                case 3 -> createShop();
++                case 4 -> showShops();
++                case 5 -> showHistory();
++                case 6 -> deleteProfile();
++                default -> System.out.println("error");
++            }
++        }
++    }
++
++
++    private static void addProduct() {
++        System.out.println("Enter the shop name: ");
++        String shopName = DataBase.strscan.nextLine().trim();
++
++        Optional<Shop> shoppde = DataBase.shops
++                .stream()
++                .filter(s7s -> s7s.getName().equals(shopName)).findFirst();
++
++        if (shoppde.isEmpty()) {
++            System.out.println("Shop not found!");
++            return;
++        }
++
++        Shop shop = shoppde.get();
++        Product product = new Product();
++        product.setId(UUID.randomUUID().toString());
++        product.setShopId(shop.getId());
++
++        System.out.println("Enter the product name: ");
++        product.setName(DataBase.strscan.nextLine().trim());
++
++        System.out.println("Enter the product price: ");
++        product.setPrice(DataBase.intscan.nextDouble());
++
++        DataBase.products.add(product);
++        System.out.println("Product added successfully!");
++    }
++
++    private static void editProduct() {
++        System.out.println("Enter product name to edit: ");
++        String productName = DataBase.strscan.nextLine().trim();
++        Optional<Product> productOpt = DataBase.products
++                .stream()
++                .filter(p -> p.getName().equals(productName))
++                .findFirst();
++        if (productOpt.isEmpty()) {
++            System.out.println("Product not found!");
++            return;
++        }
++        Product product = productOpt.get();
++        System.out.println("1. Change Name ");
++        System.out.println("2. Change Price ");
++        System.out.println("3. Delete Product");
++
++        int choice = DataBase.intscan.nextInt();
++        DataBase.strscan.nextLine();
++        switch (choice) {
++            case 1 -> {
++                System.out.println("Enter new name: ");
++                product.setName(DataBase.strscan.nextLine().trim());
++            }
++            case 2 -> {
++                System.out.println("Enter new price: ");
++                product.setPrice(DataBase.intscan.nextDouble());
++            }
++            case 3 -> DataBase.products.remove(product);
++            default -> System.out.println("Invalid choice!");
++        }
++    }
++
++    private static void createShop() {
++        Shop shop = new Shop();
++        shop.setId(UUID.randomUUID().toString());
++        System.out.println("Enter the shop name: ");
++        shop.setName(DataBase.strscan.nextLine().trim());
++        DataBase.shops.add(shop);
++        System.out.println("Shop created !");
++    }
++
++    private static void showShops() {
++        System.out.println("List of shops:");
++        DataBase.shops.forEach(shop -> System.out.println("- " + shop.getName()));
++    }
++
++    private static void showHistory() {
++        System.out.println("Purchase history:");
++        DataBase.histories.forEach(history ->
++                System.out.println("Spent: " + history.getOverallPrice() + " | Products: " + history.getProducts().size()));
++    }
++
++    private static void deleteProfile() {
++        System.out.println("Profile deleted!");
++    }
++
++}
+Index: src/main/java/org/telegram/entity/enums/Role.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity.enums;\r\n\r\npublic enum Role {\r\n    seller,user\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/enums/Role.java b/src/main/java/org/telegram/entity/enums/Role.java
+--- a/src/main/java/org/telegram/entity/enums/Role.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/enums/Role.java	(date 1741847283866)
+@@ -1,5 +1,16 @@
+ package org.telegram.entity.enums;
+ 
+ public enum Role {
+-    seller,user
++    SELLER("Seller"),
++    USER("User");
++
++    private final String displayName;
++
++    Role(String displayName) {
++        this.displayName = displayName;
++    }
++
++    public String getDisplayName() {
++        return displayName;
++    }
+ }
+Index: src/main/java/org/telegram/entity/enums/Status.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.telegram.entity.enums;\r\n\r\npublic enum Status {\r\n    active, blocked, deleted\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/telegram/entity/enums/Status.java b/src/main/java/org/telegram/entity/enums/Status.java
+--- a/src/main/java/org/telegram/entity/enums/Status.java	(revision 8b9513602ce6eeb00104640d06df9f3d4572c2e4)
++++ b/src/main/java/org/telegram/entity/enums/Status.java	(date 1741847129162)
+@@ -1,5 +1,18 @@
+ package org.telegram.entity.enums;
+ 
+ public enum Status {
+-    active, blocked, deleted
++    ACTIVE("Active"),
++    BLOCKED("Blocked"),
++    DELETED("Deleted");
++
++    private final String description;
++
++    Status(String description) {
++        this.description = description;
++    }
++
++    public String getDescription() {
++        return description;
++    }
+ }
++
