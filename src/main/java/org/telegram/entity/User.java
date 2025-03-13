@@ -13,7 +13,10 @@ public class User {
     private String id;
     private String name;
     private String password;
+    private String login;
     private Role role;
     private Status status;
     private Double balance;
+    private Status userStatus;
+    private Role userRole;
 }
